@@ -36,10 +36,11 @@ import sys
 
 import autolab_core.utils as utils
 from autolab_core import Point, YamlConfig
-from perception import BinaryImage, ColorImage, DepthImage, GdImage, GrayscaleImage, RgbdImage, RenderMode
+from autolab_core import BinaryImage, ColorImage, DepthImage, GdImage, GrayscaleImage, RgbdImage
+from perception import RenderMode
 
-from gqcnn import Grasp2D
-from gqcnn import Visualizer as vis2d
+from gqcnn.grasping import Grasp2D
+from visualization import Visualizer2D as vis2d
 
 from dexnet.learning import TensorDataset
 
@@ -97,8 +98,12 @@ def visualize_tensor_dataset(dataset, config):
         else:
             raise ValueError('Field type %s not supported!' %(field_type))
 
+        """
         skip_datapoint = False
-        for f, filter_cfg in config['filter'].iteritems():
+        for f, filter_cfg in config['filter'].items():
+            #print(f)
+            #print(filter_cfg)
+            #print(datapoint[field_name])
             data = datapoint[f]
             if 'greater_than' in filter_cfg.keys() and data < filter_cfg['greater_than']:
                 skip_datapoint = True
@@ -113,7 +118,9 @@ def visualize_tensor_dataset(dataset, config):
         for f in print_fields:
             data = datapoint[f]
             logging.info('Field %s:' %(f))
-            print data
+            print(data)
+            #print data
+        """
 
         grasp_2d = Grasp2D(Point(image.center), 0, datapoint['hand_poses'][2])
 

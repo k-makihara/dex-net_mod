@@ -39,7 +39,8 @@ gripper_name : str
 """
 import argparse
 import collections
-import cPickle as pkl
+#import cPickle as pkl
+import _pickle as pkl
 import gc
 import IPython
 import json
@@ -53,8 +54,8 @@ import time
 
 from autolab_core import Point, RigidTransform, YamlConfig
 import autolab_core.utils as utils
-from gqcnn import Grasp2D
-from gqcnn import Visualizer as vis2d
+from gqcnn.grasping import Grasp2D
+from visualization import Visualizer2D as vis2d
 from meshpy import ObjFile, RenderMode, SceneObject, UniformPlanarWorksurfaceImageRandomVariable
 from perception import CameraIntrinsics, BinaryImage, DepthImage
 
